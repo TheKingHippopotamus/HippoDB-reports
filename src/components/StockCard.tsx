@@ -19,9 +19,10 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const attentionRatio = stock.attentionRatio;
   const attentionRatioPercent =
-    stock.attentionRatio.total > 0
-      ? Math.round((stock.attentionRatio.asked / stock.attentionRatio.total) * 100)
+    attentionRatio && attentionRatio.total > 0
+      ? Math.round((attentionRatio.asked / attentionRatio.total) * 100)
       : 0;
 
   return (
@@ -80,15 +81,21 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
         {/* Attention meter badge */}
         <div
           className={`px-2.5 py-1 rounded-full border text-[11px] sm:text-xs font-mono font-bold flex items-center gap-1.5 ${
-            stock.attentionRatio.asked === 0
-              ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white'
-              : 'border-[#1A1A1A]/40 bg-white text-[#1A1A1A]'
+            !attentionRatio
+              ? 'border-[#1A1A1A]/25 bg-white text-neutral-500'
+              : attentionRatio.asked === 0
+                ? 'border-[#1A1A1A] bg-[#1A1A1A] text-white'
+                : 'border-[#1A1A1A]/40 bg-white text-[#1A1A1A]'
           }`}
         >
           <Eye className="w-3.5 h-3.5" />
-          <span>
-            קשב אנליסטים: <strong>{stock.attentionRatio.asked}/{stock.attentionRatio.total}</strong> ({attentionRatioPercent}%)
-          </span>
+          {attentionRatio ? (
+            <span>
+              קשב אנליסטים: <strong>{attentionRatio.asked}/{attentionRatio.total}</strong> ({attentionRatioPercent}%)
+            </span>
+          ) : (
+            <span>קשב אנליסטים: לא נמדד</span>
+          )}
         </div>
       </div>
 
@@ -113,7 +120,7 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
               למה זה משנה?
             </h4>
           </div>
-          <p className="text-base sm:text-lg leading-relaxed font-serif">
+          <p className="text-base sm:text-lg leading-relaxed font-serif whitespace-pre-line">
             {stock.whyItMatters}
           </p>
         </div>
@@ -121,6 +128,20 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
         {stock.customDetail && (
           <div className="p-3 sm:p-4 rounded-lg border border-[#1A1A1A]/30 bg-[#F6F4EF] text-sm sm:text-base leading-relaxed">
             {stock.customDetail}
+          </div>
+        )}
+
+        {stock.readingNote && (
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="w-4 sm:w-6 h-[1px] bg-[#1A1A1A] opacity-50" />
+              <h4 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-600">
+                איך לקרוא את זה?
+              </h4>
+            </div>
+            <p className="text-base sm:text-lg leading-relaxed font-serif">
+              {stock.readingNote}
+            </p>
           </div>
         )}
 
@@ -152,16 +173,22 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
         )}
 
         {/* Triggers and Invalidations */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 pt-2">
-          <div className="p-3.5 sm:p-4 rounded-lg border border-[#1A1A1A]/40 bg-neutral-50">
-            <div className="flex items-center gap-1.5 mb-1.5 font-bold text-xs uppercase tracking-wider text-red-900">
-              <AlertCircle className="w-4 h-4 text-red-700" />
-              <span>מה צריך לקרות כדי שזה יתפוצץ:</span>
+        <div
+          className={`grid grid-cols-1 gap-3 sm:gap-4 pt-2 ${
+            stock.triggerToExplode ? 'md:grid-cols-2' : ''
+          }`}
+        >
+          {stock.triggerToExplode && (
+            <div className="p-3.5 sm:p-4 rounded-lg border border-[#1A1A1A]/40 bg-neutral-50">
+              <div className="flex items-center gap-1.5 mb-1.5 font-bold text-xs uppercase tracking-wider text-red-900">
+                <AlertCircle className="w-4 h-4 text-red-700" />
+                <span>מה צריך לקרות כדי שזה יתפוצץ:</span>
+              </div>
+              <p className="text-xs sm:text-sm leading-relaxed font-serif text-neutral-900">
+                {stock.triggerToExplode}
+              </p>
             </div>
-            <p className="text-xs sm:text-sm leading-relaxed font-serif text-neutral-900">
-              {stock.triggerToExplode}
-            </p>
-          </div>
+          )}
 
           <div className="p-3.5 sm:p-4 rounded-lg border border-[#1A1A1A]/40 bg-neutral-50">
             <div className="flex items-center gap-1.5 mb-1.5 font-bold text-xs uppercase tracking-wider text-emerald-900">

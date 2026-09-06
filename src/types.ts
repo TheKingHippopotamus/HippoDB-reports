@@ -20,9 +20,13 @@ export interface StockDetails {
   keyNumbers?: string[];
   tableData?: DataTableConfig;
   customDetail?: string;
-  attention: string;
-  attentionRatio: { asked: number; total: number };
-  triggerToExplode: string;
+  /** נוכח רק כאשר המסמך המקורי מדווח מדד קשב לחברה. */
+  attention?: string;
+  attentionRatio?: { asked: number; total: number };
+  /** נוכח רק כאשר המסמך המקורי כולל סעיף "מה צריך לקרות כדי שזה יתפוצץ". */
+  triggerToExplode?: string;
+  /** סעיף "איך לקרוא את זה" — קיים רק במקומות שבהם המקור כולל אותו. */
+  readingNote?: string;
   invalidation: string;
   extraQuotes?: string[];
   isWatchlist?: boolean;
