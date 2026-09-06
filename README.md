@@ -4,28 +4,32 @@
 
 ---
 
-## פריסה אוטומטית ל-GitHub Pages (Deployment Guide)
+## פריסה ל-GitHub Pages ישירות מענף `main` (ללא Actions)
 
-הפרויקט מותאם ומוכן באופן מלא לפריסה אוטומטית ב-**GitHub Pages**.
+הפרויקט מוגדר כך שבכל הרצה של `npm run build`, תוצרי הפריסה נשמרים אוטומטית בתיקיית `docs/` ומוכנים לפריסה ישירה מתוך ענף `main`.
 
-### שלבי הפעלה בריפוזיטורי ב-GitHub:
+### שלבי הפעלה פשוטים ב-GitHub:
 
-1. **דחיפת הקוד ל-GitHub**:
-   דחפו את הקבצים לענף `main` (או `master`).
+1. **דחיפת הקוד לענף הראשי**:
+   - ודאו שהרצתם `npm run build` לפני הדחיפה (או שהקבצים בתיקיית `docs/` מעודכנים).
+   - בצעו `git push` לענף `main`.
 
-2. **הפעלת GitHub Pages באמצעות GitHub Actions**:
-   - היכנסו ל-**Settings** של הריפוזיטורי שלכם ב-GitHub.
-   - בתפריט הצדדי, בחרו ב-**Pages** (תחת קטגוריית *Code and automation*).
-   - תחת **Build and deployment** -> **Source**, שנו מ-*Deploy from a branch* ל-**GitHub Actions**.
+2. **הגדרת GitHub Pages ב-Settings**:
+   - היכנסו ל-**Settings** של הריפוזיטורי ב-GitHub.
+   - בתפריט השמאלי, לחצו על **Pages** (תחת *Code and automation*).
+   - תחת **Build and deployment**:
+     - **Source**: בחרו **Deploy from a branch**.
+     - **Branch**: בחרו **main**.
+     - **Folder** (התיקייה לצד ה-Branch): שנו מ-`/(root)` ל-**/docs**.
+   - לחצו על **Save**.
 
 3. **זהו!**
-   - קובץ ה-Workflow שהוגדר (`.github/workflows/deploy.yml`) ירוץ אוטומטית בכל `push` לענף הראשי.
-   - תוך דקה האתר יהיה באוויר בכתובת:
-     `https://<your-username>.github.io/<repository-name>/`
+   תוך כחצי דקה האתר יעלה לאוויר בכתובת:
+   `https://<your-username>.github.io/<repository-name>/`
 
 ---
 
-## תכונות תאימות שהוטמעו:
-- **נתיבים יחסיים (Relative Base Path)**: מוגדר `base: './'` ב-`vite.config.ts`, כך שהאתר עובד מכל כתובת ותת-ספרייה ללא תלות בשם הריפו.
-- **אריזת תמונות ונכסים מלאה (Asset Bundling)**: כל האיורים והנכסים נארזים ישירות לתוך `dist/assets` עם תמיכה מלאה בכל דפדפן.
-- **תמיכה ב-SPA & 404 Fallback**: נוסף קובץ `public/404.html` המבטיח ניווט חלק גם בעת רענון עמודים.
+## הגדרות מובנות בפרויקט:
+- **`base: './'`**: נתיבים יחסיים המבטיחים טעינה חלקה של כל קובצי ה-JS, ה-CSS והאיורים מכל תת-ספרייה בריפו.
+- **קובץ `.nojekyll`**: מנטרל את מנוע ברירת המחדל של Jekyll ב-GitHub ומאפשר טעינה ישירה ומהירה של כל נכסי האפליקציה.
+- **קובץ `404.html`**: מטפל בניתוב דפים ומבטיח פעולה תקינה בריענון הדפדפן.
