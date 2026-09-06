@@ -10,6 +10,11 @@ import {
 } from './ResearchCharts';
 import { SectionTaxonomyBadge } from './IconHelper';
 import { ArrowUp, Printer } from 'lucide-react';
+import {
+  coverHeroImage,
+  mechanismEditorialImage,
+  datacenterEditorialImage,
+} from '../assets/images';
 
 interface ContinuousViewProps {
   slides: SlideItem[];
@@ -79,7 +84,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
         {/* Editorial Fine-Line Research Illustration */}
         <div className="mt-6 rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
           <img
-            src="/src/assets/images/editorial_tariffs_cover_1788653421978.jpg"
+            src={coverHeroImage}
             alt="ניתוח מכסים גלובלי: סחר ימי, שרשראות אספקה ושחיקת מרווחים"
             className="w-full h-48 sm:h-80 object-cover"
             referrerPolicy="no-referrer"
@@ -171,7 +176,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
               <>
                 <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-5 shadow-xs">
                   <img
-                    src="/src/assets/images/mechanism_margin_editorial_1788653436982.jpg"
+                    src={mechanismEditorialImage}
                     alt="מודל שבירת גמישות המחירים ושחיקת מרווחים"
                     className="w-full h-44 sm:h-64 object-cover"
                     referrerPolicy="no-referrer"
@@ -188,7 +193,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
             {isDataCenters && (
               <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-5 shadow-xs">
                 <img
-                  src="/src/assets/images/datacenter_power_editorial_1788653450140.jpg"
+                  src={datacenterEditorialImage}
                   alt="תשתיות דאטה סנטרים ורשת החשמל"
                   className="w-full h-44 sm:h-64 object-cover"
                   referrerPolicy="no-referrer"

@@ -11,6 +11,11 @@ import {
 } from './ResearchCharts';
 import { ArrowLeft } from 'lucide-react';
 import { documentMeta } from '../data/analysisData';
+import {
+  coverHeroImage,
+  mechanismEditorialImage,
+  datacenterEditorialImage,
+} from '../assets/images';
 
 interface SlideViewProps {
   slide: SlideItem;
@@ -152,13 +157,13 @@ export const SlideView: React.FC<SlideViewProps> = ({
                 <>
                   <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
                     <img
-                      src="/src/assets/images/editorial_tariffs_cover_1788653421978.jpg"
+                      src={coverHeroImage}
                       alt="ניתוח מכסים ומניות: שרשראות אספקה ושחיקת מרווחים"
                       className="w-full h-40 sm:h-64 object-cover"
                       referrerPolicy="no-referrer"
                     />
                     <div className="p-2 sm:p-2.5 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7] flex items-center justify-between">
-                      <span>Figure 1.0 — שרשראות אספקה, מכסים והמנוף התפעולי הנעלם</span>
+                      <span>Figure 1.0 — שרשראות אספקה, מכסים וההמנוף התפעולי הנעלם</span>
                       <span className="font-bold">12,381 CALLS ANALYZED</span>
                     </div>
                   </div>
@@ -196,7 +201,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
                 <>
                   <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
                     <img
-                      src="/src/assets/images/mechanism_margin_editorial_1788653436982.jpg"
+                      src={mechanismEditorialImage}
                       alt="מנגנון שבירת העברת העלויות"
                       className="w-full h-36 sm:h-56 object-cover"
                       referrerPolicy="no-referrer"
@@ -213,7 +218,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
               {isDataCenters && (
                 <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-2 shadow-xs">
                   <img
-                    src="/src/assets/images/datacenter_power_editorial_1788653450140.jpg"
+                    src={datacenterEditorialImage}
                     alt="תשתיות דאטה סנטרים ורשת החשמל"
                     className="w-full h-36 sm:h-56 object-cover"
                     referrerPolicy="no-referrer"
