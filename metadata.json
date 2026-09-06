@@ -1,0 +1,6 @@
+{
+  "name": "ניתוח מכסים ומניות: ההנחה שאינה נבדקת",
+  "description": "ניתוח מעמיק של 12,381 שיחות רווחים ו-5 המניות שיתפוצצו במידה וההנחה הרווחת לא תתממש",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

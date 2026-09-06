@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: "Frank Ruhl Libre", serif;
+    --font-sans: "Assistant", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    direction: rtl;
+    text-align: right;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Custom scrollbar for slide content containers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(26, 26, 26, 0.2);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 26, 26, 0.4);
+}
+
+/* Clear Geometric Theme Colors */
+:root {
+  --bg-primary: #FDFCFB;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #F6F4F0;
+  --border-main: #1A1A1A;
+  --border-subtle: #E2DED7;
+  --text-primary: #1A1A1A;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --accent: #1A1A1A;
+  --accent-contrast: #FFFFFF;
+}
+
+/* Geometric vertical text utility */
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
+}
+
+/* Geometric architectural grid watermark */
+.bg-grid-geometric {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(26, 26, 26, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+}
+
