@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StockDetails } from '../types';
 import { DataTable } from './DataTable';
 import { AlertCircle, CheckCircle, Eye, Copy, Check, BarChart2 } from 'lucide-react';
-import { TopicIconBadge } from './IconHelper';
+import { getStockIndustryIcon } from './IconHelper';
 
 interface StockCardProps {
   stock: StockDetails;
@@ -29,11 +29,17 @@ export const StockCard: React.FC<StockCardProps> = ({ stock }) => {
       {/* Header section with ticker and mechanism */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-3 sm:pb-4 border-b border-[#1A1A1A]/20">
         <div className="flex items-center gap-3">
-          <TopicIconBadge
-            topic={`${stock.ticker} ${stock.name} ${stock.description}`}
-            className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg border-2 border-[#1A1A1A] bg-[#F6F4EF] flex items-center justify-center shrink-0 shadow-xs"
-            iconClassName="w-5 h-5 sm:w-6 sm:h-6 text-[#1A1A1A]"
-          />
+          {(() => {
+            const IndustryIcon = getStockIndustryIcon(stock.ticker);
+            return (
+              <div
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg border-2 border-[#1A1A1A] bg-[#F6F4EF] flex items-center justify-center shrink-0 shadow-xs"
+                title={`${stock.ticker} - ${stock.name}`}
+              >
+                <IndustryIcon className="w-5 h-5 sm:w-6 sm:h-6 text-[#1A1A1A]" />
+              </div>
+            );
+          })()}
           <div className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded font-mono font-bold text-base sm:text-lg tracking-wider bg-[#1A1A1A] text-white">
             {stock.ticker}
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SlideItem } from '../types';
-import { IconHelper } from './IconHelper';
+import { SectionTaxonomyBadge } from './IconHelper';
 import { DataTable } from './DataTable';
 import { StockCard } from './StockCard';
 import {
@@ -64,6 +64,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
   const isCover = slide.id === 'cover';
   const isMethodology = slide.id === 'methodology' || slide.slideNumber === 2;
   const isMechanism = slide.id === 'mechanism' || slide.slideNumber === 3;
+  const isDataCenters = slide.id === 'data-centers' || slide.slideNumber === 12;
   const isSummary = slide.id === 'summary' || slide.slideNumber === 17;
 
   return (
@@ -103,16 +104,25 @@ export const SlideView: React.FC<SlideViewProps> = ({
               <div className="w-2 h-2 rounded-full border border-[#1A1A1A] opacity-20" />
             </div>
 
-            <div className="w-8 h-8 rounded-full border border-[#1A1A1A]/30 flex items-center justify-center mt-4">
-              <IconHelper name={slide.iconName} className="w-4 h-4 opacity-75" />
-            </div>
+            <SectionTaxonomyBadge
+              sectionId={slide.id}
+              slideNumber={slide.slideNumber}
+              className="w-8 h-8 rounded border border-[#1A1A1A]/30 flex items-center justify-center mt-4 bg-white shadow-2xs"
+              iconClassName="w-4 h-4 text-[#1A1A1A]"
+            />
           </aside>
 
-          {/* Main Content Area - Maximized space on smartphones */}
+          {/* Main Content Area */}
           <section className="flex-1 flex flex-col p-4 sm:p-8 lg:p-10 min-w-0 overflow-hidden relative z-10">
             {/* Header / Section label */}
             <div className="pb-3 sm:pb-4 mb-3 sm:mb-4 border-b border-[#1A1A1A]/15 shrink-0">
               <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                <SectionTaxonomyBadge
+                  sectionId={slide.id}
+                  slideNumber={slide.slideNumber}
+                  className="w-6 h-6 rounded border border-[#1A1A1A]/30 bg-[#F6F4EF] flex items-center justify-center shrink-0 md:hidden"
+                  iconClassName="w-3 h-3 text-[#1A1A1A]"
+                />
                 <span className="w-6 sm:w-12 h-[1px] bg-[#1A1A1A]" />
                 <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] opacity-80">
                   {slide.category}
@@ -140,9 +150,9 @@ export const SlideView: React.FC<SlideViewProps> = ({
               {/* Cover Slide Hero Image & Metrics Grid */}
               {isCover && (
                 <>
-                  <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100">
+                  <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
                     <img
-                      src="/src/assets/images/tariff_analysis_hero_1788652159445.jpg"
+                      src="/src/assets/images/editorial_tariffs_cover_1788653421978.jpg"
                       alt="ניתוח מכסים ומניות: שרשראות אספקה ושחיקת מרווחים"
                       className="w-full h-40 sm:h-64 object-cover"
                       referrerPolicy="no-referrer"
@@ -184,9 +194,9 @@ export const SlideView: React.FC<SlideViewProps> = ({
               {/* Research Visual Chart for Mechanism Breakdown Slide */}
               {isMechanism && (
                 <>
-                  <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100">
+                  <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
                     <img
-                      src="/src/assets/images/mechanism_breakdown_1788652174112.jpg"
+                      src="/src/assets/images/mechanism_margin_editorial_1788653436982.jpg"
                       alt="מנגנון שבירת העברת העלויות"
                       className="w-full h-36 sm:h-56 object-cover"
                       referrerPolicy="no-referrer"
@@ -197,6 +207,21 @@ export const SlideView: React.FC<SlideViewProps> = ({
                   </div>
                   <MechanismBreakdownDiagram />
                 </>
+              )}
+
+              {/* Section 12: Data Centers & AI Grid Power Editorial Illustration */}
+              {isDataCenters && (
+                <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-2 shadow-xs">
+                  <img
+                    src="/src/assets/images/datacenter_power_editorial_1788653450140.jpg"
+                    alt="תשתיות דאטה סנטרים ורשת החשמל"
+                    className="w-full h-36 sm:h-56 object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="p-2 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7]">
+                    Figure 3.0 — AI Data Centers: עומסי רשת החשמל, דרישות גיבוי רציף והזדמנות הגנרטורים
+                  </div>
+                </div>
               )}
 
               {/* Research Visual Chart for Comparative Summary Slide */}
@@ -213,7 +238,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
                 </div>
               )}
 
-              {/* Geometric Balance Quotes */}
+              {/* Quotes */}
               {slide.content.quotes &&
                 slide.content.quotes.map((q, idx) => (
                   <blockquote
@@ -231,7 +256,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
                   </blockquote>
                 ))}
 
-              {/* Tables (Optimized with responsive mobile card mode in DataTable) */}
+              {/* Tables */}
               {slide.content.tables &&
                 slide.content.tables.map((table, idx) => (
                   <DataTable key={idx} config={table} />
@@ -304,7 +329,7 @@ export const SlideView: React.FC<SlideViewProps> = ({
                 ))}
             </div>
 
-            {/* Quick advance to next chapter (No 'שקופית' mention) */}
+            {/* Quick advance to next chapter */}
             {slide.slideNumber < 18 && onNextSlide && (
               <div className="pt-3 mt-2 border-t border-[#1A1A1A]/15 flex items-center justify-between text-xs opacity-60">
                 <span className="font-mono text-[10px] tracking-wider uppercase">

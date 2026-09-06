@@ -1,7 +1,7 @@
 import React from 'react';
 import { SlideItem } from '../types';
 import { X, ChevronLeft } from 'lucide-react';
-import { TopicIconBadge } from './IconHelper';
+import { SectionTaxonomyBadge } from './IconHelper';
 
 interface TableOfContentsModalProps {
   isOpen: boolean;
@@ -42,7 +42,7 @@ export const TableOfContentsModal: React.FC<TableOfContentsModalProps> = ({
           </button>
         </div>
 
-        {/* List of chapters with bespoke topic SVG icons */}
+        {/* List of chapters with exact domain taxonomy icons */}
         <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-1.5 custom-scrollbar">
           {slides.map((slide, idx) => {
             const isActive = idx === currentSlideIndex;
@@ -63,8 +63,9 @@ export const TableOfContentsModal: React.FC<TableOfContentsModalProps> = ({
                   <span className="font-mono text-xs opacity-60 w-6 shrink-0">
                     {String(slide.slideNumber).padStart(2, '0')}
                   </span>
-                  <TopicIconBadge
-                    topic={`${slide.title} ${slide.category} ${slide.id}`}
+                  <SectionTaxonomyBadge
+                    sectionId={slide.id}
+                    slideNumber={slide.slideNumber}
                     className={`w-7 h-7 rounded border flex items-center justify-center shrink-0 ${
                       isActive
                         ? 'border-white/30 bg-white/10 text-white'

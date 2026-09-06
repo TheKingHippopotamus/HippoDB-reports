@@ -8,7 +8,7 @@ import {
   AttentionDisparityChart,
   MechanismBreakdownDiagram,
 } from './ResearchCharts';
-import { TopicIconBadge } from './IconHelper';
+import { SectionTaxonomyBadge } from './IconHelper';
 import { ArrowUp, Printer } from 'lucide-react';
 
 interface ContinuousViewProps {
@@ -49,11 +49,12 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
           </svg>
         </div>
 
-        <div className="flex items-center justify-between gap-4 mb-4">
+        {/* Institutional classification bar */}
+        <div className="flex items-center justify-between gap-4 mb-5">
           <div className="flex items-center gap-2">
             <span className="w-8 h-[1px] bg-[#1A1A1A] opacity-60" />
             <span className="text-[10px] sm:text-[11px] tracking-[0.25em] uppercase font-bold text-neutral-500">
-              VOLUME 01 // PERSONAL RESEARCH ANALYSIS
+              VOLUME 01 // INSTITUTIONAL MACRO RESEARCH
             </span>
           </div>
 
@@ -67,37 +68,29 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
           </button>
         </div>
 
-        <div className="flex items-start gap-3.5 sm:gap-4">
-          <TopicIconBadge
-            topic="מכסים ומדיניות סחר כלכלית"
-            className="w-11 h-11 sm:w-14 sm:h-14 rounded-xl border-2 border-[#1A1A1A] bg-[#F6F4EF] flex items-center justify-center shrink-0 shadow-xs mt-1"
-            iconClassName="w-6 h-6 sm:w-8 sm:h-8 text-[#1A1A1A]"
-          />
-          <div>
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-black italic tracking-tight leading-[1.15]">
-              {documentMeta.mainTitle}
-            </h1>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-lg font-serif italic text-neutral-700 leading-relaxed">
-              {documentMeta.subtitle}
-            </p>
-          </div>
-        </div>
+        {/* Pure, authoritative editorial typography */}
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-black italic tracking-tight leading-[1.15]">
+          {documentMeta.mainTitle}
+        </h1>
+        <p className="mt-3 sm:mt-4 text-sm sm:text-lg font-serif italic text-neutral-700 leading-relaxed max-w-3xl">
+          {documentMeta.subtitle}
+        </p>
 
-        {/* Hero Architectural Research Image */}
-        <div className="mt-6 rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100">
+        {/* Editorial Fine-Line Research Illustration */}
+        <div className="mt-6 rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 shadow-xs">
           <img
-            src="/src/assets/images/tariff_analysis_hero_1788652159445.jpg"
-            alt="ניתוח מכסים ומניות: שרשראות אספקה ושחיקת מרווחים"
-            className="w-full h-44 sm:h-72 object-cover"
+            src="/src/assets/images/editorial_tariffs_cover_1788653421978.jpg"
+            alt="ניתוח מכסים גלובלי: סחר ימי, שרשראות אספקה ושחיקת מרווחים"
+            className="w-full h-48 sm:h-80 object-cover"
             referrerPolicy="no-referrer"
           />
           <div className="p-2.5 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7] flex items-center justify-between">
-            <span>Figure 1.0 — שרשראות אספקה, מכסים והמנוף התפעולי הנעלם</span>
-            <span className="font-bold">12,381 CALLS ANALYZED</span>
+            <span>Figure 1.0 — מסד נתונים מאקרו: סחר ימי, חוקי מכס ושחיקת מנוף תפעולי</span>
+            <span className="font-bold text-[#1A1A1A]">12,381 שיחות ועידה נותחו</span>
           </div>
         </div>
 
-        {/* Metrics summary */}
+        {/* Metrics summary cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-6">
           {documentMeta.metrics.map((m, idx) => (
             <div
@@ -119,6 +112,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
       {slides.slice(1).map((slide) => {
         const isMethodology = slide.id === 'methodology' || slide.slideNumber === 2;
         const isMechanism = slide.id === 'mechanism' || slide.slideNumber === 3;
+        const isDataCenters = slide.id === 'data-centers' || slide.slideNumber === 12;
         const isSummary = slide.id === 'summary' || slide.slideNumber === 17;
 
         return (
@@ -128,15 +122,21 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
             data-section-index={slide.slideNumber}
             className="scroll-mt-6 p-3 sm:p-10 rounded-none sm:rounded-xl border-0 sm:border-2 border-[#1A1A1A] bg-white text-[#1A1A1A] shadow-none sm:shadow-sm transition-colors"
           >
-            {/* Chapter header */}
+            {/* Chapter Header with Exact Domain Taxonomy Badge */}
             <div className="pb-4 sm:pb-5 mb-5 sm:mb-6 border-b border-[#1A1A1A]/15">
               <div className="flex items-center justify-between gap-2 mb-2.5">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 sm:w-8 h-[1px] bg-[#1A1A1A] opacity-60" />
+                <div className="flex items-center gap-2.5">
+                  <SectionTaxonomyBadge
+                    sectionId={slide.id}
+                    slideNumber={slide.slideNumber}
+                    className="w-7 h-7 rounded border border-[#1A1A1A]/30 bg-[#F6F4EF] flex items-center justify-center shrink-0 shadow-2xs"
+                    iconClassName="w-3.5 h-3.5 text-[#1A1A1A]"
+                  />
                   <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-600">
                     SECTION — {String(slide.slideNumber).padStart(2, '0')} // {slide.category}
                   </span>
                 </div>
+
                 {slide.tag && (
                   <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full border border-[#1A1A1A] bg-[#1A1A1A] text-white">
                     {slide.tag}
@@ -144,26 +144,19 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                 )}
               </div>
 
-              {/* Title with matching bespoke SVG topic icon */}
-              <div className="flex items-start sm:items-center gap-3">
-                <TopicIconBadge
-                  topic={`${slide.title} ${slide.category} ${slide.id}`}
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-[#1A1A1A] bg-[#F6F4EF] flex items-center justify-center shrink-0 shadow-2xs mt-0.5 sm:mt-0"
-                  iconClassName="w-4 h-4 sm:w-5 sm:h-5 text-[#1A1A1A]"
-                />
-                <h2 className="text-xl sm:text-3xl font-serif font-black italic tracking-tight text-balance">
-                  {slide.title}
-                </h2>
-              </div>
+              {/* Title in Classical Typography */}
+              <h2 className="text-xl sm:text-3xl font-serif font-black italic tracking-tight text-balance">
+                {slide.title}
+              </h2>
 
               {slide.subtitle && (
-                <p className="mt-1.5 sm:mt-2 mr-11 sm:mr-13 text-xs sm:text-base font-serif italic opacity-75 leading-relaxed">
+                <p className="mt-1.5 sm:mt-2 text-xs sm:text-base font-serif italic opacity-75 leading-relaxed">
                   {slide.subtitle}
                 </p>
               )}
             </div>
 
-            {/* Lead */}
+            {/* Lead paragraph */}
             {slide.content.lead && (
               <div className="p-3.5 sm:p-4 rounded border border-[#1A1A1A]/30 mb-5 sm:mb-6 font-serif italic text-base sm:text-lg bg-[#F6F4EF] text-[#1A1A1A]">
                 {slide.content.lead}
@@ -173,22 +166,37 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
             {/* Visual Research Chart for Methodology */}
             {isMethodology && <AttentionDisparityChart />}
 
-            {/* Visual Research Chart and Image for Mechanism */}
+            {/* Section 3: Visual Editorial Illustration & Mechanism Breakdown Diagram */}
             {isMechanism && (
               <>
-                <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-4">
+                <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-5 shadow-xs">
                   <img
-                    src="/src/assets/images/mechanism_breakdown_1788652174112.jpg"
-                    alt="מנגנון שבירת העברת העלויות"
-                    className="w-full h-40 sm:h-60 object-cover"
+                    src="/src/assets/images/mechanism_margin_editorial_1788653436982.jpg"
+                    alt="מודל שבירת גמישות המחירים ושחיקת מרווחים"
+                    className="w-full h-44 sm:h-64 object-cover"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="p-2 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7]">
-                    Figure 2.0 — מודל הגמישות: שבירת שיווי המשקל כתוצאה מהעלאת מחירים
+                  <div className="p-2.5 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7]">
+                    Figure 2.0 — נקודת השבירה: שחיקת גמישות המחירים ומעבר מהעלאת מחיר להתכווצות מרווח תפעולי
                   </div>
                 </div>
                 <MechanismBreakdownDiagram />
               </>
+            )}
+
+            {/* Section 12: Data Centers & AI Grid Power Editorial Illustration */}
+            {isDataCenters && (
+              <div className="w-full rounded-lg overflow-hidden border border-[#1A1A1A]/30 bg-neutral-100 my-5 shadow-xs">
+                <img
+                  src="/src/assets/images/datacenter_power_editorial_1788653450140.jpg"
+                  alt="תשתיות דאטה סנטרים ורשת החשמל"
+                  className="w-full h-44 sm:h-64 object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="p-2.5 text-[10px] sm:text-xs font-mono text-neutral-700 border-t border-[#1A1A1A]/20 bg-[#FAF9F7]">
+                  Figure 3.0 — AI Data Centers: עומסי רשת החשמל, דרישות גיבוי רציף והזדמנות הגנרטורים
+                </div>
+              </div>
             )}
 
             {/* Visual Research Chart for Comparative Summary */}
@@ -204,7 +212,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                 ))}
             </div>
 
-            {/* Quotes */}
+            {/* Blockquotes */}
             {slide.content.quotes &&
               slide.content.quotes.map((q, qIdx) => (
                 <blockquote
@@ -222,13 +230,13 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                 </blockquote>
               ))}
 
-            {/* Tables (Responsive mobile cards & desktop table with topic icons) */}
+            {/* Clean, Professional Data Tables */}
             {slide.content.tables &&
               slide.content.tables.map((table, tIdx) => (
                 <DataTable key={tIdx} config={table} />
               ))}
 
-            {/* Bullet lists with bespoke topic icons */}
+            {/* Bullet lists with clean typographic markers */}
             {slide.content.bulletLists &&
               slide.content.bulletLists.map((list, bIdx) => (
                 <div
@@ -237,11 +245,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                 >
                   {list.title && (
                     <h3 className="text-base sm:text-lg font-bold mb-3 flex items-center gap-2">
-                      <TopicIconBadge
-                        topic={list.title}
-                        className="w-6 h-6 rounded border border-[#1A1A1A]/30 bg-white flex items-center justify-center shrink-0"
-                        iconClassName="w-3.5 h-3.5 text-[#1A1A1A]"
-                      />
+                      <span className="w-3 h-[2px] bg-[#1A1A1A]" />
                       <span>{list.title}</span>
                     </h3>
                   )}
@@ -256,36 +260,29 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                 </div>
               ))}
 
-            {/* Stock breakdown */}
+            {/* Stock breakdown card */}
             {slide.content.stock && (
               <StockCard stock={slide.content.stock} />
             )}
 
-            {/* Extra Sections with bespoke topic icons */}
+            {/* Narrative Extra Sections */}
             {slide.content.extraSections &&
               slide.content.extraSections.map((section, eIdx) => (
                 <div
                   key={eIdx}
                   className="p-4 sm:p-5 rounded border border-[#1A1A1A]/30 my-5 sm:my-6 bg-[#F6F4EF]"
                 >
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <TopicIconBadge
-                      topic={section.title}
-                      className="w-6 h-6 rounded border border-[#1A1A1A]/30 bg-white flex items-center justify-center shrink-0"
-                      iconClassName="w-3.5 h-3.5 text-[#1A1A1A]"
-                    />
-                    <h3 className="text-lg sm:text-xl font-bold font-serif italic">
-                      {section.title}
-                    </h3>
-                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold font-serif italic mb-2">
+                    {section.title}
+                  </h3>
 
                   {section.subtitle && (
-                    <p className="text-xs font-mono text-neutral-600 mb-2 mr-8">
+                    <p className="text-xs font-mono text-neutral-600 mb-2">
                       {section.subtitle}
                     </p>
                   )}
                   {Array.isArray(section.text) ? (
-                    <div className="space-y-2.5 mr-8">
+                    <div className="space-y-2.5">
                       {section.text.map((t, tIdx) => (
                         <p key={tIdx} className={`${fontSizeClasses[fontSize]} text-sm sm:text-base leading-relaxed`}>
                           {t}
@@ -293,7 +290,7 @@ export const ContinuousView: React.FC<ContinuousViewProps> = ({
                       ))}
                     </div>
                   ) : (
-                    <p className={`${fontSizeClasses[fontSize]} text-sm sm:text-base leading-relaxed mr-8`}>
+                    <p className={`${fontSizeClasses[fontSize]} text-sm sm:text-base leading-relaxed`}>
                       {section.text}
                     </p>
                   )}

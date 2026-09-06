@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DataTableConfig } from '../types';
 import { LayoutList, Table as TableIcon } from 'lucide-react';
-import { TopicIconBadge } from './IconHelper';
 
 interface DataTableProps {
   config: DataTableConfig;
@@ -44,7 +43,7 @@ export const DataTable: React.FC<DataTableProps> = ({ config }) => {
         </div>
       </div>
 
-      {/* 1. Mobile Smart Cards View (Optimized for Smartphones, no horizontal cutoffs) */}
+      {/* 1. Mobile Smart Cards View (Clean, structured, numbers aligned) */}
       <div className={`${mobileView === 'cards' ? 'block sm:hidden' : 'hidden'} space-y-3`}>
         {config.rows.map((row, rowIdx) => {
           const isHighlighted = config.highlightRowIndex === rowIdx;
@@ -61,18 +60,11 @@ export const DataTable: React.FC<DataTableProps> = ({ config }) => {
                   : 'bg-white border border-[#1A1A1A]/30'
               }`}
             >
-              {/* Primary entity/metric header with custom SVG topic icon */}
+              {/* Primary entity/metric header */}
               <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#1A1A1A]/15">
-                <div className="flex items-center gap-2">
-                  <TopicIconBadge
-                    topic={title}
-                    className="w-6 h-6 rounded border border-[#1A1A1A]/20 bg-[#F6F4EF] flex items-center justify-center shrink-0"
-                    iconClassName="w-3.5 h-3.5 text-[#1A1A1A]"
-                  />
-                  <span className="font-serif font-black text-base italic text-[#1A1A1A]">
-                    {title}
-                  </span>
-                </div>
+                <span className="font-serif font-black text-base italic text-[#1A1A1A]">
+                  {title}
+                </span>
                 {isHighlighted && (
                   <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-[#1A1A1A] text-white rounded-full">
                     תרחיש במוקד
@@ -112,7 +104,7 @@ export const DataTable: React.FC<DataTableProps> = ({ config }) => {
         })}
       </div>
 
-      {/* 2. Desktop & Tablet Classical High-Contrast Table View (or when 'table' is selected on mobile) */}
+      {/* 2. Desktop & Tablet Classical High-Contrast Table View */}
       <div
         className={`${
           mobileView === 'table' ? 'block' : 'hidden sm:block'
@@ -161,18 +153,7 @@ export const DataTable: React.FC<DataTableProps> = ({ config }) => {
                             : ''
                         }`}
                       >
-                        {cellIdx === 0 ? (
-                          <div className="flex items-center gap-2">
-                            <TopicIconBadge
-                              topic={cell}
-                              className="w-5 h-5 rounded border border-[#1A1A1A]/20 bg-[#F6F4EF] flex items-center justify-center shrink-0"
-                              iconClassName="w-3 h-3 text-[#1A1A1A]"
-                            />
-                            <span>{cell}</span>
-                          </div>
-                        ) : (
-                          cell
-                        )}
+                        {cell}
                       </td>
                     ))}
                   </tr>
